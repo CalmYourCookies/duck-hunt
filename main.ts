@@ -34,6 +34,7 @@ function gunPrep () {
         . . . . . . . f f f f f 6 6 6 f 
         `, SpriteKind.Player)
     gun.setPosition(96, 61)
+    controller.moveSprite(gun)
     Crosshair = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . f f . . . . . . . 
@@ -53,12 +54,15 @@ function gunPrep () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(Crosshair)
-    controller.moveSprite(gun)
     Crosshair.setFlag(SpriteFlag.StayInScreen, true)
+}
+function displayHighscore (text: string) {
+	
 }
 let Duck: Sprite = null
 let Crosshair: Sprite = null
 let gun: Sprite = null
+let mySprite = 0
 gunPrep()
 scene.setBackgroundImage(img`
     888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
