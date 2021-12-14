@@ -14,27 +14,52 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
         info.changeScoreBy(1)
     }
 })
+function gunPrep () {
+    gun = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . f f f f f . . . . . . . . 
+        . . . f 6 6 6 f f f . . . . . . 
+        . . . f 6 6 6 6 6 f f f f . . . 
+        . . . f f 6 6 6 6 6 6 6 f f f . 
+        . . . . f f f 6 6 6 6 6 6 6 f f 
+        . . . . . . f f f f 6 6 6 6 6 f 
+        . . . . . . . . f f f f 6 6 6 f 
+        . . . . . . . f . f f f 6 6 6 f 
+        . . . . . . . f . f . f 6 6 6 f 
+        . . . . . . . f f f f f 6 6 6 f 
+        `, SpriteKind.Player)
+    gun.setPosition(96, 61)
+    Crosshair = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . f f f f f . . . . f f f f f . 
+        . f f f f f . . . . f f f f f . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(Crosshair)
+    controller.moveSprite(gun)
+    Crosshair.setFlag(SpriteFlag.StayInScreen, true)
+}
 let Duck: Sprite = null
+let Crosshair: Sprite = null
 let gun: Sprite = null
-gun = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . f f f f f . . . . . . . . 
-    . . . f 6 6 6 f f f . . . . . . 
-    . . . f 6 6 6 6 6 f f f f . . . 
-    . . . f f 6 6 6 6 6 6 6 f f f . 
-    . . . . f f f 6 6 6 6 6 6 6 f f 
-    . . . . . . f f f f 6 6 6 6 6 f 
-    . . . . . . . . f f f f 6 6 6 f 
-    . . . . . . . f . f f f 6 6 6 f 
-    . . . . . . . f . f . f 6 6 6 f 
-    . . . . . . . f f f f f 6 6 6 f 
-    `, SpriteKind.Player)
-gun.setPosition(96, 61)
+gunPrep()
 scene.setBackgroundImage(img`
     888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
     888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -157,27 +182,6 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
-let Crosshair = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . f f f f f . . . . f f f f f . 
-    . f f f f f . . . . f f f f f . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . f f . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(Crosshair)
-controller.moveSprite(gun)
-Crosshair.setFlag(SpriteFlag.StayInScreen, true)
 info.startCountdown(30)
 game.onUpdateInterval(500, function () {
     Duck = sprites.createProjectileFromSide(img`
