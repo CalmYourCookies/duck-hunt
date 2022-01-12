@@ -7,6 +7,8 @@ info.onCountdownEnd(function () {
     } else {
         game.splash("You're a bad duck hunter....")
     }
+    pause(2000)
+    game.splash(highscore)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
@@ -57,12 +59,12 @@ function gunPrep () {
     Crosshair.setFlag(SpriteFlag.StayInScreen, true)
 }
 function displayHighscore (text: string) {
-	
+    return info.highScore()
 }
 let Duck: Sprite = null
 let Crosshair: Sprite = null
 let gun: Sprite = null
-let mySprite = 0
+let highscore = 0
 gunPrep()
 scene.setBackgroundImage(img`
     888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
@@ -187,6 +189,7 @@ scene.setBackgroundImage(img`
     eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
     `)
 info.startCountdown(30)
+highscore = info.highScore()
 game.onUpdateInterval(500, function () {
     Duck = sprites.createProjectileFromSide(img`
         . . . . . . . . . . . . . . . . 
